@@ -1,3 +1,4 @@
+package com.example.users;
 // package com.example.monolithicK8s;
 
 // import org.springframework.context.annotation.Bean;

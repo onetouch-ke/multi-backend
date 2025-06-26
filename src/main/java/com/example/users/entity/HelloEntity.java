@@ -1,4 +1,4 @@
-package com.example.monolithicK8s.entity;
+package com.example.users.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

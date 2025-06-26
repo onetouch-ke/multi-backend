@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.users.dto.LogInDto;
+import com.example.users.dto.LoginResDto;
 import com.example.users.dto.UserRegisterDto;
 import com.example.users.entity.UserEntity;
 import com.example.users.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -29,36 +29,35 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // ID(PK) 기준 단일 회원 조회
-    @GetMapping("/{id}")
-    public Optional<UserEntity> getUserById(@PathVariable Integer id) {
-        return userService.getUserById(id);
+    // 로그인 ID 기준 단일 회원 조회
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserEntity> getUserByUserId(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.getUserByUserId(userId));
     }
-    
+
     // 회원가입
-    @PostMapping("/resgister")
-    public UserEntity resgister(@RequestBody UserRegisterDto dto) {
+    @PostMapping("/register")
+    public UserEntity register(@RequestBody UserRegisterDto dto) {
         return userService.resgister(dto);
     }
-    
+
     // 로그인
     @PostMapping("/login")
-    public UserEntity login(@RequestBody LogInDto dto) {
+    public LoginResDto login(@RequestBody LogInDto dto) {
         return userService.login(dto);
     }
+
     // 회원 정보 수정
-    @PutMapping("/{id}")
-    public ResponseEntity<UserEntity> updateUser(@PathVariable Integer id, @RequestBody UserRegisterDto dto) {
-        UserEntity updatedUser = userService.updateUser(id, dto);
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserEntity> updateUser(@PathVariable String userId, @RequestBody UserRegisterDto dto) {
+        UserEntity updatedUser = userService.updateUser(userId, dto);
         return ResponseEntity.ok(updatedUser);
     }
-    
-    //회원 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity<UserEntity> deleteUser(@PathVariable Integer id) {
-        UserEntity deleteUser = userService.deleteUser(id);
-        return ResponseEntity.ok(deleteUser);
+
+    // 회원 삭제
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<UserEntity> deleteUser(@PathVariable String userId) {
+        UserEntity deletedUser = userService.deleteUser(userId);
+        return ResponseEntity.ok(deletedUser);
     }
-    // push test
-    
 }

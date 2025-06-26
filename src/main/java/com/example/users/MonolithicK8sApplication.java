@@ -1,4 +1,4 @@
-package com.example.monolithicK8s;
+package com.example.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

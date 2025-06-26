@@ -1,7 +1,8 @@
-package com.example.monolithicK8s.repository;
+package com.example.users.repository;
 
-import com.example.monolithicK8s.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.users.entity.UserEntity;
 
 import java.util.Optional;
 
