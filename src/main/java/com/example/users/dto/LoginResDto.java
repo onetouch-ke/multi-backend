@@ -1,4 +1,3 @@
-// LoginResponseDto.java
 package com.example.users.dto;
 
 import lombok.AllArgsConstructor;
@@ -10,5 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginResDto {
     private String userId;
-    private boolean isAdmin;
+    private String email;
+    private boolean admin;
 }

@@ -6,8 +6,9 @@ import com.example.users.dto.LogInDto;
 import com.example.users.dto.LoginResDto;
 import com.example.users.dto.UserRegisterDto;
 import com.example.users.entity.UserEntity;
+import com.example.users.exception.EmailAlreadyExistsException;
+import com.example.users.exception.UserIdAlreadyExistsException;
 import com.example.users.repository.UserRepository;
-
 import java.util.List;
 
 @Service
@@ -32,15 +33,23 @@ public class UserService {
 
     // 회원가입
     public UserEntity resgister(UserRegisterDto dto) {
-        UserEntity user = UserEntity.builder()
-                .username(dto.getUsername())
-                .userId(dto.getUserId())
-                .password(dto.getPassword())
-                .email(dto.getEmail())
-                .build();
+     if (userRepository.existsByUserId(dto.getUserId())) {
+            throw new UserIdAlreadyExistsException("이미 존재하는 아이디입니다.");
+        }
 
-        return userRepository.save(user);
-    }
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다.");
+        }
+
+    UserEntity user = UserEntity.builder()
+            .username(dto.getUsername())
+            .userId(dto.getUserId())
+            .password(dto.getPassword())
+            .email(dto.getEmail())
+            .build();
+
+    return userRepository.save(user);
+}
 
     // 회원 정보 수정 (userId 기준)
     public UserEntity updateUser(String userId, UserRegisterDto dto) {
@@ -66,8 +75,8 @@ public class UserService {
 
     boolean isAdmin = "root".equals(user.getUserId());
 
-    return new LoginResDto(user.getUserId(), isAdmin);
-    }
+    return new LoginResDto(user.getUserId(), user.getEmail(), isAdmin);
+}
 
 
 
