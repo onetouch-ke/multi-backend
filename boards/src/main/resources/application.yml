@@ -1,0 +1,13 @@
+server:
+  port: 8081 #배포환경에선 같아도 됩니다.
+
+spring:
+  datasource:
+    # url: jdbc:mariadb://mariadb.default.svc.cluster.local:3306/BoardsService # 배포용
+    url: jdbc:mariadb://10.10.8.111:3306/BoardsService                 # 개발용
+    username: root
+    password: P@ssw0rd
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
