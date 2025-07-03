@@ -13,3 +13,7 @@ WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# 빌드 명령어 예시
+# docker build -f Dockerfile -t users-app ./users
+# docker build -f Dockerfile -t boards-app ./boards
